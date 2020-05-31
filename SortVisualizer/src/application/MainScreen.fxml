@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <BorderPane prefHeight="643.0" prefWidth="903.0">
+         <left>
+            <VBox prefHeight="643.0" prefWidth="203.0" spacing="10.0" style="-fx-background-color: #373b41;" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Label text="Size" textFill="#81a2be">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Slider fx:id="sizeSlide" blockIncrement="50.0" majorTickUnit="50.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" />
+                        <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="37.0" prefWidth="214.0" text="Create New Graph">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="183.0">
+                     <children>
+                        <Label text="Algorithm" textFill="#81a2be">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <RadioButton id="bubble" fx:id="bubble" mnemonicParsing="false" selected="true" text="Bubble Sort" textFill="#b5bd68">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sortSelection" />
+                           </toggleGroup>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </RadioButton>
+                        <RadioButton id="insertion" fx:id="insertion" mnemonicParsing="false" text="Insertion Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </RadioButton>
+                        <RadioButton id="merge" fx:id="merge" mnemonicParsing="false" text="Merge Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </RadioButton>
+                        <RadioButton id="selection" fx:id="selection" mnemonicParsing="false" text="Selection Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </RadioButton>
+                     </children>
+                  </VBox>
+                  <Label text="Description" textFill="#81a2be">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
+         </left>
+         <center>
+            <HBox fx:id="graphArea" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #c5c8c6;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
