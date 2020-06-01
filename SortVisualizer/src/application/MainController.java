@@ -1,15 +1,25 @@
 package application;
 
 
+import java.util.Random;
+
+import application.SortingAlgs.Algorithm;
+import application.SortingAlgs.BubbleSort;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class MainController {
+	
+	int[] arr;
+	
+	Algorithm alg;
 	
 	@FXML
 	private HBox graphArea;
@@ -18,8 +28,13 @@ public class MainController {
 	private Slider sizeSlide;
 	
 	@FXML
-	private Button createGraphBtn;
+	private Button sortBtn;
 	
+	@FXML
+	private Button stopBtn;
+
+	
+
 	@FXML
 	private void createGraph(ActionEvent e) {
 		// Clear current graph
@@ -35,11 +50,36 @@ public class MainController {
 		System.out.println(barWidth);
 		System.out.println(numBars);
 		
-		for (int i = 1; i <= numBars; i++) {
-			double barHeight = height * i / numBars;
-			Rectangle bar = new Rectangle(barWidth, barHeight, Color.WHITE);
+		arr = new int[numBars];
+		
+		Random random = new Random();
+		for (int i = 0; i < numBars; i++) {
+			arr[i] = random.nextInt(numBars);
+			double barHeight = height * (arr[i]+1) / numBars;
+			Rectangle bar = new Rectangle(barWidth, barHeight, Color.ALICEBLUE);
 			graphArea.getChildren().add(bar);
 		}
 		
+		sortBtn.setDisable(false);
 	}
+	
+	
+	
+	@FXML
+	private void startSort() {
+		alg = new BubbleSort(arr, graphArea);
+		
+		stopBtn.setDisable(false);
+		
+		alg.beginSortProcess();
+
+	}
+	
+	@FXML
+	private void stopSort() {
+		System.out.println("clicked");
+		alg.shutDown();
+		stopBtn.setDisable(true);
+	}
+	
 }

@@ -8,11 +8,14 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <BorderPane prefHeight="643.0" prefWidth="903.0">
          <left>
@@ -20,24 +23,24 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
-                        <Label text="Size" textFill="#81a2be">
+                        <Label text="Size" textFill="#81a2be" underline="true">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <Slider fx:id="sizeSlide" blockIncrement="50.0" majorTickUnit="50.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" />
-                        <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="37.0" prefWidth="214.0" text="Create New Graph">
+                        <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #5d486f; -fx-border-radius: 0;" text="Create New Graph" textFill="#c5c8c6">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
                   </VBox>
-                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="183.0">
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="183.0" spacing="5.0">
                      <children>
-                        <Label text="Algorithm" textFill="#81a2be">
+                        <Label text="Algorithm" textFill="#81a2be" underline="true">
                            <font>
-                              <Font size="18.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                         <RadioButton id="bubble" fx:id="bubble" mnemonicParsing="false" selected="true" text="Bubble Sort" textFill="#b5bd68">
@@ -77,11 +80,54 @@
                         </RadioButton>
                      </children>
                   </VBox>
-                  <Label text="Description" textFill="#81a2be">
+                  <Label text="Runtime" textFill="#81a2be" underline="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Best" textFill="#c5c8c6">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Average" textFill="#c5c8c6" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Worst" textFill="#c5c8c6" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="O(n)" textFill="#de935f" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -91,7 +137,25 @@
                </padding></VBox>
          </left>
          <center>
-            <HBox fx:id="graphArea" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #c5c8c6;" BorderPane.alignment="CENTER" />
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #2e3436;">
+                     <children>
+                        <Button fx:id="sortBtn" disable="true" mnemonicParsing="false" onAction="#startSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #b294bb; -fx-border-radius: 0;" text="Sort">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button id="stopBtn" fx:id="stopBtn" disable="true" mnemonicParsing="false" onAction="#stopSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #cc6666; -fx-border-radius: 0;" text="Stop">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="graphArea" alignment="BOTTOM_LEFT" prefHeight="675.0" prefWidth="700.0" style="-fx-background-color: #65737E;" />
+               </children>
+            </VBox>
          </center>
       </BorderPane>
    </children>
