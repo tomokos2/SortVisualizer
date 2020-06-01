@@ -71,6 +71,11 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
+                        <Button fx:id="sortBtn" disable="true" mnemonicParsing="false" onAction="#startSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #81a2be; -fx-border-radius: 0;" text="Sort" textFill="#373b41">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </VBox>
                   <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="183.0" spacing="5.0">
@@ -80,7 +85,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <RadioButton id="bubble" fx:id="bubble" mnemonicParsing="false" selected="true" text="Bubble Sort" textFill="#b5bd68">
+                        <RadioButton id="bubble" fx:id="bubble" mnemonicParsing="false" onAction="#describeBubble" selected="true" text="Bubble Sort" textFill="#b5bd68">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -91,7 +96,7 @@
                               <Insets top="5.0" />
                            </padding>
                         </RadioButton>
-                        <RadioButton id="insertion" fx:id="insertion" mnemonicParsing="false" text="Insertion Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                        <RadioButton id="insertion" fx:id="insertion" mnemonicParsing="false" onAction="#describeInsertion" text="Insertion Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -99,7 +104,7 @@
                               <Insets top="5.0" />
                            </padding>
                         </RadioButton>
-                        <RadioButton id="merge" fx:id="merge" mnemonicParsing="false" text="Merge Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                        <RadioButton id="merge" fx:id="merge" mnemonicParsing="false" onAction="#describeMerge" text="Merge Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -107,7 +112,7 @@
                               <Insets top="5.0" />
                            </padding>
                         </RadioButton>
-                        <RadioButton id="selection" fx:id="selection" mnemonicParsing="false" text="Selection Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                        <RadioButton id="selection" fx:id="selection" mnemonicParsing="false" onAction="#describeSelection" text="Selection Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -148,17 +153,17 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="O(n)" textFill="#de935f" GridPane.columnIndex="1">
+                        <Label fx:id="bestRun" text="O(n)" textFill="#de935f" GridPane.columnIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="averageRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="worstRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -178,12 +183,12 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #2e3436;">
                      <children>
-                        <Button fx:id="sortBtn" disable="true" mnemonicParsing="false" onAction="#startSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #b294bb; -fx-border-radius: 0;" text="Sort">
+                        <Button id="stopBtn" fx:id="stopBtn" disable="true" mnemonicParsing="false" onAction="#stopSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #cc6666; -fx-border-radius: 0;" text="Stop">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button id="stopBtn" fx:id="stopBtn" disable="true" mnemonicParsing="false" onAction="#stopSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #cc6666; -fx-border-radius: 0;" text="Stop">
+                        <Button id="pauseBtn" fx:id="pauseToggleBtn" disable="true" mnemonicParsing="false" onAction="#togglePause" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #de935f; -fx-border-radius: 0;" text="Pause">
                            <font>
                               <Font size="16.0" />
                            </font>

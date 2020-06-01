@@ -14,8 +14,8 @@ public class BubbleSort extends Algorithm {
 	public BubbleSort(int[] array, HBox graphArea) {
 		this.arr = array;
 		this.graphArea = graphArea;
+		this.isPaused = false;
 	}
-	
 	
 	// Swap adjacent if they are in the wrong order
 	// Needs one extra pass in order to confirm sorted	
@@ -30,8 +30,6 @@ public class BubbleSort extends Algorithm {
 			// With every pass, the last unsorted element is the only one guaranteed to be sorted
 			for (int j = 0; j < arr.length - i - 1; j++) {
 				
-				
-				
 				int current = j;
 				int comparedIndex = j+1;
 				
@@ -42,11 +40,15 @@ public class BubbleSort extends Algorithm {
 					swap(current, comparedIndex);
 				}
 				
+				// Check for any user disruptions
+				if (isPaused) pause();
 				if (wasStopRequested) break;
 				
 				resetBarColor(current, comparedIndex);
 			}
 			
+			// Check again for any user disruptions
+			if (isPaused) pause();
 			if (wasStopRequested) break;
 			
 			if (isSorted) {
@@ -104,6 +106,10 @@ public class BubbleSort extends Algorithm {
 		bar2.setFill(Color.ALICEBLUE);
 	}
 	
+	public static String[] getDescription() {
+		String[] runTimes = {"O(n)", "O(n^2)", "O(n^2)"};
+		return runTimes;
+	}
 	
 }
 
