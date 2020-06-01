@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public abstract class Algorithm {
-	public int sleepTime = 20;
+	public int sleepTime = 1000;
 	ExecutorService service = Executors.newCachedThreadPool();
 	protected boolean wasStopRequested;
 	

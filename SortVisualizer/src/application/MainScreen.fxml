@@ -28,7 +28,44 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="sizeSlide" blockIncrement="50.0" majorTickUnit="50.0" min="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="50.0" />
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label contentDisplay="TOP" text="10" textFill="#c5c8c6" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="50" textFill="#c5c8c6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label text="100" textFill="#c5c8c6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="size10" mnemonicParsing="false">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="sizeSelection" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="size50" mnemonicParsing="false" selected="true" toggleGroup="$sizeSelection" GridPane.columnIndex="1" />
+                              <RadioButton fx:id="size100" mnemonicParsing="false" toggleGroup="$sizeSelection" GridPane.columnIndex="2" />
+                           </children>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </GridPane>
                         <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #5d486f; -fx-border-radius: 0;" text="Create New Graph" textFill="#c5c8c6">
                            <font>
                               <Font size="16.0" />
@@ -151,6 +188,21 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="274.0" spacing="5.0">
+                           <children>
+                              <Label text="Slow" textFill="#b5bd68">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Slider fx:id="speedSlide" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" value="3.0" />
+                              <Label text="Fast" textFill="#b5bd68">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                   <HBox fx:id="graphArea" alignment="BOTTOM_LEFT" prefHeight="675.0" prefWidth="700.0" style="-fx-background-color: #65737E;" />

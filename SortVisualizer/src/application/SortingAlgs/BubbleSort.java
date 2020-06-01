@@ -30,7 +30,7 @@ public class BubbleSort extends Algorithm {
 			// With every pass, the last unsorted element is the only one guaranteed to be sorted
 			for (int j = 0; j < arr.length - i - 1; j++) {
 				
-				if (wasStopRequested) break;
+				
 				
 				int current = j;
 				int comparedIndex = j+1;
@@ -41,6 +41,10 @@ public class BubbleSort extends Algorithm {
 					isSorted = false;
 					swap(current, comparedIndex);
 				}
+				
+				if (wasStopRequested) break;
+				
+				resetBarColor(current, comparedIndex);
 			}
 			
 			if (wasStopRequested) break;
@@ -61,34 +65,43 @@ public class BubbleSort extends Algorithm {
 		bar2.setFill(Color.web("#DE935F"));
 		
 		sleep();
-		
-		bar1.setFill(Color.ALICEBLUE);
-		bar2.setFill(Color.ALICEBLUE);
 	}
 	
 	private void swap(int current, int indexToSwap) {
-		// Swap
 
 		
-		Rectangle tempBar = (Rectangle) graphArea.getChildren().get(current);
+		Rectangle currBar = (Rectangle) graphArea.getChildren().get(current);
 		
-		Paint tempFill = tempBar.getFill();
-		double tempHeight = tempBar.getHeight();
+		// Save the current bar's attributes
+		Paint tempFill = currBar.getFill();
+		double tempHeight = currBar.getHeight();
 		
 		Rectangle barToSwap = (Rectangle) graphArea.getChildren().get(indexToSwap);
 		
-		tempBar.setHeight(barToSwap.getHeight());
-		tempBar.setFill(barToSwap.getFill());
+		// Swap the heights and colors of the bars
+		currBar.setHeight(barToSwap.getHeight());
+		currBar.setFill(barToSwap.getFill());
 		
 		barToSwap.setHeight(tempHeight);
 		barToSwap.setFill(tempFill);
 		
+		// Swap the two also.
 		int temp = arr[current];
 		arr[current] = arr[indexToSwap];
 		
 		arr[indexToSwap] = temp;
 
+		sleep();
 		
+	}
+	
+	private void resetBarColor(int current, int comparedIndex) {
+		Rectangle bar1 = (Rectangle) graphArea.getChildren().get(current);
+		
+		Rectangle bar2 = (Rectangle) graphArea.getChildren().get(comparedIndex);
+		
+		bar1.setFill(Color.ALICEBLUE);
+		bar2.setFill(Color.ALICEBLUE);
 	}
 	
 	
