@@ -7,6 +7,9 @@ import java.util.ResourceBundle;
 
 import application.SortingAlgs.Algorithm;
 import application.SortingAlgs.BubbleSort;
+import application.SortingAlgs.InsertionSort;
+import application.SortingAlgs.MergeSort;
+import application.SortingAlgs.SelectionSort;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -23,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 
 public class MainController implements Initializable {
 	
+	// Styles
 	private final static String HOVER_CREATE_BTN_STYLE = "-fx-background-color:  #b294bb;";
 	private final static String IDLE_CREATE_BTN_STYLE = "-fx-background-color: #5d486f;";
 	private final static String SORT_BTN_SHOW_STYLE = "-fx-background-color: #81a2be;";
@@ -32,36 +36,51 @@ public class MainController implements Initializable {
 	private final static String PAUSE_LABEL = "Pause";
 	private final static String RESUME_LABEL = "Resume";
 	
-	
+	// Speed selection possibilities in ms
 	final int[] SPEEDS = {1000, 500, 50, 20, 5};
 	
+	// Graph array
 	int[] arr;
 	
+	// Current algorithm
 	Algorithm alg;
 	
+	// Pause/Resume button tracker
 	boolean isPaused;
 	
+	// Wrapper for bar graph
 	@FXML
 	private HBox graphArea;
 
+	// Slide bar to choose speed of sorting execution
 	@FXML
 	private Slider speedSlide;
 	
+	// Appears after graph is created, click to begin sort
 	@FXML
 	private Button sortBtn;
 	
+	// Create a new graph according to the size choice
+	@FXML
+	private Button createGraphBtn;
+	
+	// Terminate the sorting sequence
 	@FXML
 	private Button stopBtn;
 	
+	// Pauses or resumes the sorting sequence
 	@FXML
-	private Button createGraphBtn;
+	private Button pauseToggleBtn;
 
+	// Radio button group to choose number of bars in graph
 	@FXML
 	ToggleGroup sizeSelection;
 	
+	// Radio button group to choose the sorting algorithm
 	@FXML
 	ToggleGroup sortSelection;
 	
+	// Labels for algorithm description
 	@FXML
 	Label averageRun;
 	
@@ -71,6 +90,15 @@ public class MainController implements Initializable {
 	@FXML
 	Label bestRun;
 	
+	@FXML
+	Label spaceComp;
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * 	Algorithm description managers
+ */
+////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	
 	@FXML
 	private void describeBubble(ActionEvent e) {
@@ -79,24 +107,39 @@ public class MainController implements Initializable {
 	
 	@FXML
 	private void describeInsertion(ActionEvent e) {
-		
+		setDescription(InsertionSort.getDescription());
 	}
 	
 	@FXML
 	private void describeMerge(ActionEvent e) {
-		
+		setDescription(MergeSort.getDescription());
 	}
 	
 	@FXML
 	private void describeSelection(ActionEvent e) {
-		
+		setDescription(SelectionSort.getDescription());
 	}
 	
 	private void setDescription(String[] description) {
+		// First tag in description is best case runtime
 		bestRun.setText(description[0]);
+		
+		// Second tag in description is average case runtime
 		averageRun.setText(description[1]);
+		
+		// Third tag in description is worst case runtime
 		worstRun.setText(description[2]);
+		
+		// Fourth tag in description is space complexity
+		spaceComp.setText(description[3]);
 	}
+
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* 	Graph initialization / setup
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@FXML
 	private void createGraph(ActionEvent e) {
@@ -120,7 +163,10 @@ public class MainController implements Initializable {
 		
 		Random random = new Random();
 		for (int i = 0; i < numBars; i++) {
+			// Get a random number in the range of the number of bars
 			arr[i] = random.nextInt(numBars);
+			
+			// Bar height is proportional to the random number value
 			double barHeight = height * (arr[i]+1) / numBars;
 			Rectangle bar = new Rectangle(barWidth, barHeight, Color.ALICEBLUE);
 			graphArea.getChildren().add(bar);
@@ -130,8 +176,38 @@ public class MainController implements Initializable {
 		showSort();
 	}
 	
+	private void reset() {
+		// Stop, clear, reset pause button
+		stopSort();
+		graphArea.getChildren().clear();		
+		if (!isPaused) togglePause(new ActionEvent());	
+	}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* 	Sorting runtime button handlers
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	@FXML
-	private Button pauseToggleBtn;
+	private void startSort() {
+		hideSort();
+		alg = getAlgorithm();
+		
+		alg.setSleepTime(SPEEDS[(int) speedSlide.getValue()]); 
+		setDisablePauseStop(false);
+		
+		alg.beginSortProcess();
+	}
+	
+	@FXML
+	private void stopSort() {
+		if (alg != null) {
+			alg.shutDown();
+		}
+		setDisablePauseStop(true);
+	}
 	
 	@FXML
 	private void togglePause(ActionEvent e) {
@@ -154,34 +230,19 @@ public class MainController implements Initializable {
 			}
 		}
 	}
-	
-	
-	@FXML
-	private void startSort() {
-		hideSort();
-		alg = new BubbleSort(arr, graphArea);
-		
-		alg.setSleepTime(SPEEDS[(int) speedSlide.getValue()]); 
-		setDisablePauseStop(false);
-		
-		alg.beginSortProcess();
 
-	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+* 	Other listeners
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	@FXML
-	private void stopSort() {
-		if (alg != null) {
-			alg.shutDown();
-		}
-		setDisablePauseStop(true);
-	}
-	
-
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		isPaused = true;
+		hideSort();
 		
+		// Listen for user changing the speed of the algorithm
 		speedSlide.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue <? extends Number> observable, Number oldValue, Number newValue) {
 				if (alg != null) {
@@ -191,13 +252,11 @@ public class MainController implements Initializable {
 				}
 			}
 		});
-		
-		hideSort();
-		
+			
+		// Styling things
 		createGraphBtn.setStyle(IDLE_CREATE_BTN_STYLE);
 		createGraphBtn.setOnMouseEntered(e -> createGraphBtn.setStyle(HOVER_CREATE_BTN_STYLE));
 		createGraphBtn.setOnMouseExited(e -> createGraphBtn.setStyle(IDLE_CREATE_BTN_STYLE));
-		
 	}
 	
 	private void hideSort() {
@@ -215,13 +274,28 @@ public class MainController implements Initializable {
 		pauseToggleBtn.setDisable(shouldDisable);
 	}
 	
-	private void reset() {
+	private Algorithm getAlgorithm() {
+		String selection = ((Node) sortSelection.getSelectedToggle()).getId();
+		Algorithm selectedAlg;
 		
-		stopSort();
-		// Clear current graph
-		graphArea.getChildren().clear();
+		switch (selection) {
+		case "bubble":
+			selectedAlg = new BubbleSort(arr, graphArea);
+			break;
+		case "insertion":
+			selectedAlg = new InsertionSort(arr, graphArea);
+			break;
+		case "selection":
+			selectedAlg = new SelectionSort(arr, graphArea);
+			break;
+		case "merge":
+			selectedAlg = new MergeSort(arr, graphArea);
+			break;	
+		default:
+			selectedAlg = new BubbleSort(arr, graphArea);
+			System.err.println("Selection toggle error");
+		}
 		
-		if (!isPaused) togglePause(new ActionEvent());
-		
+		return selectedAlg;
 	}
 }

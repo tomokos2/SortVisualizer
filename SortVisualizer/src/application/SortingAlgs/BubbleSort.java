@@ -8,13 +8,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class BubbleSort extends Algorithm {
-	HBox graphArea;
-	int[] arr;
 
 	public BubbleSort(int[] array, HBox graphArea) {
-		this.arr = array;
-		this.graphArea = graphArea;
-		this.isPaused = false;
+		super(array, graphArea);
 	}
 	
 	// Swap adjacent if they are in the wrong order
@@ -107,7 +103,7 @@ public class BubbleSort extends Algorithm {
 	}
 	
 	public static String[] getDescription() {
-		String[] runTimes = {"O(n)", "O(n^2)", "O(n^2)"};
+		String[] runTimes = {"O(n)", "O(n^2)", "O(n^2)", "O(1)"};
 		return runTimes;
 	}
 	

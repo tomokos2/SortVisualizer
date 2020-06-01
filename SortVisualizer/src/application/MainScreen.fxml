@@ -66,7 +66,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </GridPane>
-                        <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #5d486f; -fx-border-radius: 0;" text="Create New Graph" textFill="#c5c8c6">
+                        <Button fx:id="createGraphBtn" mnemonicParsing="false" onAction="#createGraph" prefHeight="18.0" prefWidth="183.0" style="-fx-background-color: #5d486f; -fx-border-radius: 0;" text="Create New Graph" textFill="#c5c8c6">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -122,7 +122,7 @@
                         </RadioButton>
                      </children>
                   </VBox>
-                  <Label text="Runtime" textFill="#81a2be" underline="true">
+                  <Label text="Complexity" textFill="#81a2be" underline="true">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -133,37 +133,54 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Best" textFill="#c5c8c6">
+                        <Label text="Best" textFill="#c5c8c6" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="Average" textFill="#c5c8c6" GridPane.rowIndex="1">
+                        <Label text="Average" textFill="#c5c8c6" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label text="Worst" textFill="#c5c8c6" GridPane.rowIndex="2">
+                        <Label text="Worst" textFill="#c5c8c6" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="bestRun" text="O(n)" textFill="#de935f" GridPane.columnIndex="1">
+                        <Label fx:id="bestRun" text="O(n)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="averageRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="averageRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="worstRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="worstRun" text="O(n^2)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Time:" textFill="#b5bd68" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Space:" textFill="#b5bd68" underline="true" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="spaceComp" text="O(1)" textFill="#de935f" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -183,12 +200,12 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #2e3436;">
                      <children>
-                        <Button id="stopBtn" fx:id="stopBtn" disable="true" mnemonicParsing="false" onAction="#stopSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #cc6666; -fx-border-radius: 0;" text="Stop">
+                        <Button id="stopBtn" fx:id="stopBtn" disable="true" mnemonicParsing="false" onAction="#stopSort" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #cc6666; -fx-background-radius: 0;" text="Stop">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button id="pauseBtn" fx:id="pauseToggleBtn" disable="true" mnemonicParsing="false" onAction="#togglePause" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #de935f; -fx-border-radius: 0;" text="Pause">
+                        <Button id="pauseBtn" fx:id="pauseToggleBtn" disable="true" mnemonicParsing="false" onAction="#togglePause" prefHeight="37.0" prefWidth="214.0" style="-fx-background-color: #de935f; -fx-background-radius: 0;" text="Pause">
                            <font>
                               <Font size="16.0" />
                            </font>

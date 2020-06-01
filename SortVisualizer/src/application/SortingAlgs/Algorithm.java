@@ -3,6 +3,8 @@ package application.SortingAlgs;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javafx.scene.layout.HBox;
+
 public abstract class Algorithm {
 	
 	// Default amount of time between each frame, in ms
@@ -17,12 +19,20 @@ public abstract class Algorithm {
 	// Keep track of when the user pauses the sorting
 	protected boolean isPaused;
 	
+	HBox graphArea;
+	int[] arr;
+
+	public Algorithm(int[] array, HBox graphArea) {
+		this.arr = array;
+		this.graphArea = graphArea;
+		this.isPaused = false;
+	}
+	
 	/**
 	 *  Implement differently for each sorting algorithm
 	 *  Sorts and draws the array
 	 */
 	abstract void sort();
-
 	
 	// Call to begin sorting
 	public void beginSortProcess() {
