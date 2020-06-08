@@ -139,11 +139,11 @@ public abstract class Algorithm implements Runnable {
 		Rectangle barToSwap = (Rectangle) graphArea.getChildren().get(indexToSwap);
 		
 		// Swap the heights and colors of the bars
-		currBar.setHeight(barToSwap.getHeight());
-		currBar.setFill(barToSwap.getFill());
+		((Rectangle) graphArea.getChildren().get(current)).setHeight(barToSwap.getHeight());
+		((Rectangle) graphArea.getChildren().get(current)).setFill(barToSwap.getFill());
 		
-		barToSwap.setHeight(tempHeight);
-		barToSwap.setFill(tempFill);
+		((Rectangle) graphArea.getChildren().get(indexToSwap)).setHeight(tempHeight);
+		((Rectangle) graphArea.getChildren().get(indexToSwap)).setFill(tempFill);
 		
 		// Always sleep when a change occurs
 		sleep();

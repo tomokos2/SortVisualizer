@@ -34,7 +34,7 @@ public class InsertionSort extends Algorithm {
 				
 				// Check for user disruption
 				if (isPaused) pause();
-				if (wasStopRequested) break;
+				if (wasStopRequested) return;
 				
 				if (current >= 0 && key < arr[current]) {
 					
@@ -55,11 +55,6 @@ public class InsertionSort extends Algorithm {
 				resetBarColor(current);
 				resetBarColor(nextBar);
 			}
-			
-			
-			// Check for user disruption
-			if (isPaused) pause();
-			if (wasStopRequested) break;
 			
 		}
 		

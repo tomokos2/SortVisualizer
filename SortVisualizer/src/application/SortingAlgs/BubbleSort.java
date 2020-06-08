@@ -37,15 +37,11 @@ public class BubbleSort extends Algorithm {
 				
 				// Check for any user disruptions
 				if (isPaused) pause();
-				if (wasStopRequested) break;
+				if (wasStopRequested) return;
 				
 				resetBarColor(current);
 				resetBarColor(comparedIndex);
 			}
-			
-			// Check again for any user disruptions
-			if (isPaused) pause();
-			if (wasStopRequested) break;
 			
 			if (isSorted) {
 				break;
