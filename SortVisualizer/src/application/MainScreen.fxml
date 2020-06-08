@@ -225,6 +225,11 @@
                               </Label>
                            </children>
                         </HBox>
+                        <Button id="skipBtn" fx:id="skipBtn" disable="true" mnemonicParsing="false" onAction="#skip" prefHeight="37.0" prefWidth="57.0" style="-fx-background-radius: 0; -fx-background-color: transparent;" text="⏭" textFill="#b5bd68">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox fx:id="graphArea" alignment="BOTTOM_LEFT" prefHeight="675.0" prefWidth="700.0" style="-fx-background-color: #65737E;" />

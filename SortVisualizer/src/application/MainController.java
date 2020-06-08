@@ -21,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MainController implements Initializable {
@@ -31,13 +30,13 @@ public class MainController implements Initializable {
 	private final static String IDLE_CREATE_BTN_STYLE = "-fx-background-color: #5d486f;";
 	private final static String SORT_BTN_SHOW_STYLE = "-fx-background-color: #81a2be;";
 	private final static String SORT_BTN_HIDE_STYLE = "-fx-background-color: transparent;";
-	private final static String PAUSE_BTN_STYLE = "-fx-background-color: #de935f;";
-	private final static String RESUME_BTN_STYLE = "-fx-background-color: #8abeb7";
+	private final static String PAUSE_BTN_STYLE = "-fx-background-color: #de935f; -fx-background-radius: 0;";
+	private final static String RESUME_BTN_STYLE = "-fx-background-color: #8abeb7; -fx-background-radius: 0;"; 
 	private final static String PAUSE_LABEL = "Pause";
 	private final static String RESUME_LABEL = "Resume";
 	
 	// Speed selection possibilities in ms
-	final int[] SPEEDS = {1000, 500, 50, 20, 5};
+	final int[] SPEEDS = {1000, 500, 50, 20, 7};
 	
 	// Graph array
 	int[] arr;
@@ -72,6 +71,10 @@ public class MainController implements Initializable {
 	@FXML
 	private Button pauseToggleBtn;
 
+	// Skips the sorting to the end
+	@FXML
+	private Button skipBtn;
+	
 	// Radio button group to choose number of bars in graph
 	@FXML
 	ToggleGroup sizeSelection;
@@ -168,7 +171,7 @@ public class MainController implements Initializable {
 			
 			// Bar height is proportional to the random number value
 			double barHeight = height * (arr[i]+1) / numBars;
-			Rectangle bar = new Rectangle(barWidth, barHeight, Color.ALICEBLUE);
+			Rectangle bar = new Rectangle(barWidth, barHeight, Algorithm.BASE_BAR_COLOR);
 			graphArea.getChildren().add(bar);
 		}
 		
@@ -196,9 +199,10 @@ public class MainController implements Initializable {
 		alg = getAlgorithm();
 		
 		alg.setSleepTime(SPEEDS[(int) speedSlide.getValue()]); 
-		setDisablePauseStop(false);
+		setDisablControlBar(false);
 		
-		alg.beginSortProcess();
+		Thread thread = new Thread(alg);
+		thread.start();
 	}
 	
 	@FXML
@@ -206,7 +210,7 @@ public class MainController implements Initializable {
 		if (alg != null) {
 			alg.shutDown();
 		}
-		setDisablePauseStop(true);
+		setDisablControlBar(true);
 	}
 	
 	@FXML
@@ -230,10 +234,17 @@ public class MainController implements Initializable {
 			}
 		}
 	}
+	
+	@FXML
+	private void skip(ActionEvent e) {
+		if (alg != null) {
+			alg.setSleepTime(0);
+		}
+	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-* 	Other listeners
+* 	Other listeners/helper functions
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -269,9 +280,10 @@ public class MainController implements Initializable {
 		sortBtn.setDisable(false);
 	}
 	
-	private void setDisablePauseStop(boolean shouldDisable) {
+	private void setDisablControlBar(boolean shouldDisable) {
 		stopBtn.setDisable(shouldDisable);
 		pauseToggleBtn.setDisable(shouldDisable);
+		skipBtn.setDisable(shouldDisable);
 	}
 	
 	private Algorithm getAlgorithm() {
