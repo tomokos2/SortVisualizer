@@ -9,17 +9,23 @@ import application.SortingAlgs.Algorithm;
 import application.SortingAlgs.BubbleSort;
 import application.SortingAlgs.InsertionSort;
 import application.SortingAlgs.MergeSort;
+import application.SortingAlgs.QuickSort;
 import application.SortingAlgs.SelectionSort;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 
@@ -46,6 +52,9 @@ public class MainController implements Initializable {
 	
 	// Pause/Resume button tracker
 	boolean isPaused;
+	
+	@FXML
+	private AnchorPane anchor;
 	
 	// Wrapper for bar graph
 	@FXML
@@ -121,6 +130,11 @@ public class MainController implements Initializable {
 	@FXML
 	private void describeSelection(ActionEvent e) {
 		setDescription(SelectionSort.getDescription());
+	}
+	
+	@FXML
+	private void describeQuick(ActionEvent e) {
+		setDescription(QuickSort.getDescription());
 	}
 	
 	private void setDescription(String[] description) {
@@ -266,8 +280,22 @@ public class MainController implements Initializable {
 			
 		// Styling things
 		createGraphBtn.setStyle(IDLE_CREATE_BTN_STYLE);
-		createGraphBtn.setOnMouseEntered(e -> createGraphBtn.setStyle(HOVER_CREATE_BTN_STYLE));
-		createGraphBtn.setOnMouseExited(e -> createGraphBtn.setStyle(IDLE_CREATE_BTN_STYLE));
+		createGraphBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			
+			public void handle(MouseEvent e) {
+				createGraphBtn.setStyle(HOVER_CREATE_BTN_STYLE);
+				anchor.setCursor(Cursor.HAND);
+			}
+			
+		});
+		createGraphBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+			
+			public void handle(MouseEvent e) {
+				createGraphBtn.setStyle(IDLE_CREATE_BTN_STYLE);
+				anchor.setCursor(Cursor.DEFAULT);
+			}
+			
+		});
 	}
 	
 	private void hideSort() {
@@ -302,7 +330,10 @@ public class MainController implements Initializable {
 			break;
 		case "merge":
 			selectedAlg = new MergeSort(arr, graphArea);
-			break;	
+			break;
+		case "quick":
+			selectedAlg = new QuickSort(arr, graphArea);
+			break;
 		default:
 			selectedAlg = new BubbleSort(arr, graphArea);
 			System.err.println("Selection toggle error");

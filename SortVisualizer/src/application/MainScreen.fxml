@@ -21,7 +21,7 @@
          <left>
             <VBox prefHeight="643.0" prefWidth="203.0" spacing="10.0" style="-fx-background-color: #373b41;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                  <VBox prefHeight="187.0" prefWidth="183.0" spacing="10.0">
                      <children>
                         <Label text="Size" textFill="#81a2be" underline="true">
                            <font>
@@ -78,7 +78,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="183.0" spacing="5.0">
+                  <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="183.0" spacing="5.0">
                      <children>
                         <Label text="Algorithm" textFill="#81a2be" underline="true">
                            <font>
@@ -113,6 +113,14 @@
                            </padding>
                         </RadioButton>
                         <RadioButton id="selection" fx:id="selection" mnemonicParsing="false" onAction="#describeSelection" text="Selection Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </RadioButton>
+                        <RadioButton id="quick" fx:id="quick" mnemonicParsing="false" onAction="#describeQuick" text="Quick Sort" textFill="#b5bd68" toggleGroup="$sortSelection">
                            <font>
                               <Font size="16.0" />
                            </font>

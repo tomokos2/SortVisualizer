@@ -162,7 +162,7 @@ public class MergeSort extends Algorithm {
 	}
 
 	public static String[] getDescription() {
-		String[] runTimes = {"O(nlogn)", "O(nlogn)", "O(nlogn)", "O(n)"};
+		String[] runTimes = {"O(nlog(n))", "O(nlog(n))", "O(nlog(n))", "O(n)"};
 		return runTimes;
 	}
 
