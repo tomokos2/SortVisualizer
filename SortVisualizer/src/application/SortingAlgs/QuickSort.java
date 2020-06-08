@@ -20,20 +20,14 @@ public class QuickSort extends Algorithm {
 	@Override
 	void sort() {
 		System.out.println("Sorting quick");
-		
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + ", ");
-		}
-		System.out.println();
-		
 		quickSort(0, arr.length - 1);
-		
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + ", ");
-		}
-		System.out.println();
 	}
 	
+	/**
+	 * Recursively sorts the array by splitting it based on the partition
+	 * @param left left bound, inclusive
+	 * @param right right bound, inclusive
+	 */
 	private void quickSort(int left, int right) {
 		if (left >= right) return;
 		
@@ -44,15 +38,30 @@ public class QuickSort extends Algorithm {
 		quickSort(part + 1, right);
 	}
 	
+	/**
+	 * Using the last index as a pivot and left and right pointers,
+	 * the array moves everything smaller than the pivot to the left,
+	 * and everything greater than the pivot to the right
+	 * Values equal to the pivot don't really matter
+	 * @param left left bound
+	 * @param right right bound
+	 * @return the location of the partition in the array
+	 */
 	private int partition(int left, int right) {
 
 		// Partition based on last element
 		// This is the number upon which we will base our comparisons
 		int pivotVal = arr[right];
 		
+		// Color the pivot
+		paintBar(right, PIVOT_BAR_COLOR);
+		
 		// Pointer to the first index of the array
 		int pLeft = left;
+		paintBar(pLeft, SELECTED_BAR_COLOR);
+		
 		// Pointer to the last index of the array
+		// Don't color it to avoid re-coloring the pivot
 		int pRight = right;
 		
 		// Until the left and right pointers meet, continue partitioning
@@ -60,29 +69,57 @@ public class QuickSort extends Algorithm {
 			
 			// Find the left-most unsorted element
 			while (pLeft < right && arr[pLeft] < pivotVal) {
-				pLeft++;				
+				// Update the colored bar
+				resetBarColor(pLeft);
+				
+				// Increment the left pointer
+				pLeft++;
+				paintBar(pLeft, SELECTED_BAR_COLOR);
+				
+				// Take a nap
+				sleep();
+
 			}
 
 			// Find the right-most unsorted element
-			while (pRight > left && arr[pRight] >= pivotVal) {			
+			while (pRight > left && arr[pRight] >= pivotVal) {	
+				// Don't un-color the pivot
+				if (pRight != right) resetBarColor(pRight);
+				
+				// Increment the right pointer
 				pRight--;
+				paintBar(pRight, COMPARED_BAR_COLOR);
+				sleep();
 			}
 			
 			// Swap as long as the two pivots have not yet met
 			if (pLeft < pRight) {
-				// swap pLeft and pRight
+				
+				swapBars(pLeft, pRight);
 				int temp = arr[pRight];
 				arr[pRight] = arr[pLeft];
 				arr[pLeft] = temp;
 
 			}
+			
+			// Reset the colors of the pointers
+			resetBarColor(pLeft);
+			resetBarColor(pRight);
 		}
+		
+		// Paint and swap the pivot and end pointer location visually first
+		paintBar(pLeft, SELECTED_BAR_COLOR);
+		swapBars(pLeft, right);
+		resetBarColor(right);
+		resetBarColor(pLeft);
 		
 		// Update the pivot variable by replacing it with the beginning of that section
 		// Since pLeft >= pRight, use pLeft as the location of the partition.
 		arr[right] = arr[pLeft];
 		arr[pLeft] = pivotVal;
 		
+		// Location of the partition
 		return pLeft;
 	}
+	
 }
