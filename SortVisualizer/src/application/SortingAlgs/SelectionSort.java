@@ -12,6 +12,32 @@ public class SelectionSort extends Algorithm {
 	void sort() {
 		System.out.println("Sorting selection");
 		
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + ", ");
+		}
+		System.out.println();
+
+		
+		for (int i = 0; i < arr.length - 1; i++) {
+			
+			int minIndex = i;
+			int minValue = arr[i];
+			for (int j = i + 1; j < arr.length; j++) {
+				
+				if (arr[j] < minValue) {
+					minIndex = j;
+					minValue = arr[j];
+				}
+			}
+			
+			arr[minIndex] = arr[i];
+			arr[i] = minValue;
+		}
+		
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + ", ");
+		}
+		System.out.println();
 	}
 
 	public static String[] getDescription() {
