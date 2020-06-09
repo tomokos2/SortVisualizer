@@ -10,6 +10,7 @@ It sorts a graph of randomized bars step by step. A description of each algorith
 
 ![Demo](mergeSortGif.gif)
 
+#### Dynamically adjustable settings:
 Here is an example of bubble sort with a slow speed selection to help see every step.
 ![BubbleDemo](bubbleSortGif.gif)
 ## Structure
