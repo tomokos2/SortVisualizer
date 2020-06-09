@@ -1,5 +1,11 @@
 # SortVisualizer
-Sort Visualizer is a program that demonstrates the process of bubble sort, insertion sort, merge sort, selection sort, and quick sort by sorting a graph of randomized bars step by step. A description of each algorithm's runtime and space complexities is also displayed whenever the algorithm is chosen. 
+Sort Visualizer is a program that demonstrates the process of
+- Bubble sort
+- Insertion sort
+- Merge sort
+- Selection sort
+- Quick sort 
+by sorting a graph of randomized bars step by step. A description of each algorithm's runtime and space complexities is also displayed whenever the algorithm is chosen. 
 
 ## Structure
 This application is run on two Threads. The main thread is used for the visual display and button handling. The second thread is created whenever a new sorting process begins. By separating these two processes, the algorithm can change speed, stop, skip, and pause without interfering with the main thread's operation.
