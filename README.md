@@ -21,5 +21,4 @@ This application is run on two Threads. The main thread is used for the visual d
 ## Build
 - JavaFx-14
 - jdk-14.0.1
-- Eclipse IDE
 - Windows 10
