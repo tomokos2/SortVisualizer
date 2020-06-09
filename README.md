@@ -18,7 +18,7 @@ This application is run on two Threads. The main thread is used for the visual d
 - [The Main Controller](SortVisualizer/src/application/MainController.java) fxml file holds all of the JavaFX element handlers. As the only connection between the algorithm and the user, it handles all user button selections as well as the intial graph creation and any user interruptions such as stopping, pausing, or skipping the algorithm.
 - [Algorithm](SortVisualizer/src/application/SortingAlgs/Algorithm.java) is the abstract class that every sorting algorithm extends. It requires that every algorithm implements the sort method, but also holds many common methods such as painting bars, stopping and starting the sorting, changing algorithm speed, and swapping bars. 
 
-##Build
+## Build
 - JavaFx-14
 - jdk-14.0.1
 - Eclipse IDE
